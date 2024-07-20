@@ -1,0 +1,9 @@
+.home-container {
+  padding: 40px;
+  height: calc(100vh - 80px);
+  .header-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+}
