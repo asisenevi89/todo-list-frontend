@@ -30,12 +30,12 @@ const todoSlice = createSlice({
       if (findIndex === -1) return;
       list[findIndex] = payload;
       const updated = [...list];
-      _set(state, 'data', updated);
+      _set(state, 'data.data', updated);
     },
     setTodoListAfterDelete(state, action: PayloadAction<number>) {
       const { payload } = action;
       const list: TodoType[]  = _get(state, 'data.data', []);
-      const updatedList = list.filter((item: TodoType) => item.id === payload);
+      const updatedList = list.filter((item: TodoType) => item.id !== payload);
       const currentTotal: number = _get(state, 'data.total', 0);
       const newState = {
         total: currentTotal ? currentTotal - 1 : 0,

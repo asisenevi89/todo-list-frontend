@@ -38,7 +38,7 @@ export const initDeleteTodo = (id: number) => {
   };
 };
 
-export const updateTodo = (id: number, data: TodoAddType) => {
+export const initUpdateTodo = (id: number, data: TodoAddType) => {
   const url = `${dataUrl}/to-do/${id}`;
 
   return {

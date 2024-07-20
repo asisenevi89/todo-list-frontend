@@ -5,5 +5,46 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+    .MuiInputBase-root {
+      margin-right: 10px;
+      .MuiSvgIcon-root {
+        color: rgb(185, 184, 184);;
+      }
+    }
+  }
+  .todo-table-container {
+    height: calc(100vh - 150px);
+    overflow-y: auto;
+    .table-no-data {
+      .alert-message {
+        justify-content: center;
+        align-items: center;
+        height: calc(100vh - 320px);
+        .MuiSvgIcon-root {
+          font-size: 48px;
+        }
+      }
+    }
   }
 }
+
+.add-todo-modal, .delete-todo-modal {
+  .modal-title {
+    border-bottom: 1px solid rgb(185, 184, 184);
+  }
+  .modal-content {
+    margin-top: 20px;
+    .title-wrapper {
+      .MuiFormHelperText-root {
+        margin-left: 0px;
+      }
+    }
+    .radio-group-wrapper {
+      margin-top: 20px;
+    }
+  }
+  .modal-footer {
+    padding: 10px;
+    border-top: 1px solid rgb(185, 184, 184);
+  }
+};

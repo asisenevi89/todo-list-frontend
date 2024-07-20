@@ -6,7 +6,9 @@ import {
   setTodoListAfterUpdate,
   setTodoListAfterDelete,
 } from "../Slices/Todo";
-import { TodoListResponseType, InitActionType, TodoType } from "../Utils/CustomTypes";
+import { initFetchTodoList } from "../ActionCreators/Todo";
+import { TodoListResponseType, InitActionType } from "../Utils/CustomTypes";
+import { DEFAULT_PAGE_SIZE, DEFAULT_OFFSET } from "../Utils/Constants";
 
 type AxiosTodoListResponseType = {
   data: TodoListResponseType,
@@ -35,7 +37,7 @@ export function* createTodo(action: InitActionType) {
     yield put(setTodoListLoading(true));
     yield axios.post(url, data);
     yield put(setTodoListLoading(false));
-
+    yield put(initFetchTodoList(DEFAULT_PAGE_SIZE, DEFAULT_OFFSET));
   } catch (error) {
     yield put(setTodoListLoading(false));
     console.error(error);
