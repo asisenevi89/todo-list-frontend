@@ -6,8 +6,9 @@ import {
   setTodoListAfterUpdate,
   setTodoListAfterDelete,
 } from "../Slices/Todo";
+import { setLastResponseStatus } from "../Slices/ResponseStatus";
 import { initFetchTodoList } from "../ActionCreators/Todo";
-import { TodoListResponseType, InitActionType } from "../Utils/CustomTypes";
+import { TodoListResponseType, InitActionType, AlertSeverityType } from "../Utils/CustomTypes";
 import { DEFAULT_PAGE_SIZE, DEFAULT_OFFSET } from "../Utils/Constants";
 
 type AxiosTodoListResponseType = {
@@ -38,6 +39,11 @@ export function* createTodo(action: InitActionType) {
     yield axios.post(url, data);
     yield put(setTodoListLoading(false));
     yield put(initFetchTodoList(DEFAULT_PAGE_SIZE, DEFAULT_OFFSET));
+    yield put(setLastResponseStatus({
+      responseMessage: 'Created New Todo.',
+      lastMessageTime: Date.now(),
+      messageType: AlertSeverityType.info,
+    }));
   } catch (error) {
     yield put(setTodoListLoading(false));
     console.error(error);
@@ -52,7 +58,11 @@ export function* updateTodo(action: InitActionType) {
     yield axios.put(url, data);
     yield put(setTodoListAfterUpdate({id, ...data}))
     yield put(setTodoListLoading(false));
-
+    yield put(setLastResponseStatus({
+      responseMessage: 'Successfully updated the Todo.',
+      lastMessageTime: Date.now(),
+      messageType: AlertSeverityType.info,
+    }));
   } catch (error) {
     yield put(setTodoListLoading(false));
     console.error(error);
@@ -67,7 +77,11 @@ export function* deleteTodo(action: InitActionType) {
     yield axios.delete(url);
     yield put(setTodoListAfterDelete(id))
     yield put(setTodoListLoading(false));
-
+    yield put(setLastResponseStatus({
+      responseMessage: 'Todo deleted!',
+      lastMessageTime: Date.now(),
+      messageType: AlertSeverityType.info,
+    }));
   } catch (error) {
     yield put(setTodoListLoading(false));
     console.error(error);

@@ -39,10 +39,12 @@ import {
   initDeleteTodo,
 } from '../../ActionCreators/Todo';
 import { makeTodoListData, makeTodoListLoading } from '../../Selectors';
+import { makeLastResponseState } from '../../Selectors/general';
 import Spinner from '../Common/Spinner';
 import AddTodoModal from './partials/AddTodoModal';
 import DeleteTodoModal from './partials/DeleteTodoModal';
 import TableNoData from './partials/TableNoData';
+import Notification from './partials/Notification';
 import { TodoAddType, TodoType, TodoTypeKeyMap } from '../../Utils/CustomTypes';
 import { STATUS_DONE, DEFAULT_PAGE_SIZE, DEFAULT_OFFSET } from '../../Utils/Constants';
 import './styles.scss';
@@ -64,6 +66,7 @@ const Home = () => {
 
   const todoData = useSelector(makeTodoListData);
   const isFetching = useSelector(makeTodoListLoading);
+  const lastResponse = useSelector(makeLastResponseState);
   const { total, data: todoList } = todoData;
 
   useEffect(() => {
@@ -252,6 +255,11 @@ const Home = () => {
         selectedTodo={deleteTodo}
         onDeleteTodo={onDeleteTodo}
         onModalClose={closeDeleteModal}    
+      />
+      <Notification
+        message={lastResponse.responseMessage}
+        lastMessageTime={lastResponse.lastMessageTime}
+        alertProps={{ severity: lastResponse.messageType }}
       />
     </Spinner>
     

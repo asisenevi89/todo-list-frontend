@@ -45,7 +45,7 @@ const todoSlice = createSlice({
       _set(state, 'data', newState);
     }
   },
-})
+});
 
 export const {
   setTodoListLoading,

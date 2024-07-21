@@ -13,13 +13,13 @@ interface stateType {
   }
 };
 
-const reportState = (state:stateType) => state.todo.todoList
+const todoState = (state:stateType) => state.todo.todoList
 
 export const makeTodoListLoading = createSelector(
-  reportState, data => _get(data, 'isLoading', false),
+  todoState, data => _get(data, 'isLoading', false),
 );
 
 export const makeTodoListData = createSelector(
-  reportState, todoList => _get(todoList, 'data', emptyTodoList),
+  todoState, todoList => _get(todoList, 'data', emptyTodoList),
 );
 

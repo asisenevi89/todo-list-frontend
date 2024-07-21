@@ -36,4 +36,17 @@ export type TodoTypeKeyMap = {
   id: string
   title: string,
   status: string,
-}
+};
+
+export enum AlertSeverityType {
+  error = 'error',
+  info = 'info',
+  success = 'success',
+  warning = 'warning'
+};
+
+export type RequestStatusType = {
+  responseMessage: string,
+  lastMessageTime: number,
+  messageType: AlertSeverityType
+};
